@@ -1,0 +1,30 @@
+@import 'colors';
+
+.btn-tab {
+  color: white;
+  border-bottom: 2px rgba(0, 0, 0, 0) solid;
+  padding-bottom: 4px;
+}
+
+.btn-tab-active {
+  color: $blueColor;
+  border-bottom: 2px cornflowerblue solid;
+  padding-bottom: 4px;
+}
+
+.btn-back {
+  margin: 15px 0 0 30px;
+  display: flex;
+}
+//изменить название
+.arrow {
+  height: 23px;
+  margin-top: 15px;
+}
+
+.btn-add-more {
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  width: 170px;
+}

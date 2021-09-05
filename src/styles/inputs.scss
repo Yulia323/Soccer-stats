@@ -1,0 +1,18 @@
+//Изменить _ на -
+.search-input {
+  width: 1250px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 3px;
+  padding-left: 10px;
+  border: #222226;
+  margin-right: 15px;
+}
+
+.search-input-competitions {
+  width: 1400px;
+}
+
+input:focus {
+  box-shadow: 1px -2px 26px -13px rgba(0, 4, 146, 0.7) inset;
+}

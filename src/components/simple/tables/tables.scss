@@ -1,0 +1,52 @@
+strong {
+  margin-right: 10px;
+}
+
+//не ртносится к таблицам
+.table-container {
+  text-align: left !important;
+  line-height: 20px;
+  width: 100%;
+
+  td {
+    width: 33.3%;
+  }
+
+  tr {
+    border-bottom: 2px solid grey;
+  }
+
+  img {
+    width: 45px;
+    padding: 0 10px;
+  }
+  p {
+  display: flex;
+  align-items: center;
+}
+
+}
+
+.status {
+  background-color: #09ab3f;
+  width: 40px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.score {
+  display: flex;
+}
+
+// разобраться со странным стилем, изменить
+
+//Изменить на table-tabs
+.table-tabs {
+  text-align: left;
+  font-size: 18px;
+  display: flex;
+
+  :nth-child(1) {
+    margin: 0 15px;
+  }
+}

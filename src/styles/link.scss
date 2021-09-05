@@ -1,0 +1,26 @@
+@import 'colors';
+
+.btn-link {
+  color: #222226;
+  text-decoration: none;
+  margin-left: 40px;
+  font-size: 17px;
+}
+
+.btn-link:hover {
+  //добавить transition
+  transform: scale(1.2);
+  transition: 0.3s ease transform;
+}
+
+.link {
+  color: #BFE2FF;
+}
+
+.link:hover {
+  color: $violet;
+}
+
+.link:visited {
+  color: $blueColor;
+}

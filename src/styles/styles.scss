@@ -1,0 +1,26 @@
+@import 'reset';
+@import 'inputs';
+@import 'cards';
+@import 'src/components/simple/tables/tables';
+@import 'colors';
+@import 'link';
+@import 'button';
+@import 'calendar';
+
+//добавить вариации контейнера l, x, xxl,
+.container {
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-width: 1550px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.s-container {
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-width: 1400px;
+  font-size: 15px;
+}
