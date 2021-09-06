@@ -1,18 +1,23 @@
-//Изменить _ на -
-.search-input {
-  width: 1250px;
+@import 'colors';
+%input {
+  width: 100%;
   height: 40px;
-  background-color: #fff;
+  background-color: $light-gray;
   border-radius: 3px;
   padding-left: 10px;
-  border: #222226;
+  border: $black;
   margin-right: 15px;
 }
 
-.search-input-competitions {
-  width: 1400px;
+.search-input-l {
+  @extend %input;
+  width: 90%;
 }
 
-input:focus {
-  box-shadow: 1px -2px 26px -13px rgba(0, 4, 146, 0.7) inset;
+.search-input-m {
+  @extend %input;
+  width: 80%;
+  @media(max-width: 720px) {
+  width: 90%;
+  }
 }

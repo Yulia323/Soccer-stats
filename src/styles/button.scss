@@ -4,10 +4,13 @@
   color: white;
   border-bottom: 2px rgba(0, 0, 0, 0) solid;
   padding-bottom: 4px;
+    @media(max-width: 720px) {
+    font-size: 15px;
+  }
 }
 
 .btn-tab-active {
-  color: $blueColor;
+  color: $blue;
   border-bottom: 2px cornflowerblue solid;
   padding-bottom: 4px;
 }
@@ -16,6 +19,7 @@
   margin: 15px 0 0 30px;
   display: flex;
 }
+
 //изменить название
 .arrow {
   height: 23px;

@@ -1,1 +1,1 @@
-export const teamsStartYear = new Date().getFullYear();
+export const teamsStartId = new Date().getFullYear();

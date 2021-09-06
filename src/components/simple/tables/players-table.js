@@ -1,5 +1,5 @@
-export const PlayersTable = ({ players }) => {
-  return (<table className='container table-container'>
+export const PlayersTable = ({ players }) => (
+  <table className='container table-container'>
     {players.map((player) =>
       <tr>
         <td>
@@ -15,5 +15,5 @@ export const PlayersTable = ({ players }) => {
         </td>
       </tr>,
     )}
-  </table>);
-};
+  </table>
+);

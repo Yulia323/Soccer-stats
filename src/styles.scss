@@ -1,11 +1,12 @@
 .app-wrapper {
   margin: 0 auto;
   display: grid;
+  grid-template-rows: 80px auto;
   grid-template-areas: "h"
                        "c";
 
-  grid-template-rows: 80px auto;
   .app-wrapper-content {
+    padding-bottom: 20px;
     grid-area: c;
   }
 }

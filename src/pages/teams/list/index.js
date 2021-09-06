@@ -1,96 +1,46 @@
 import './style.scss';
-import { useEffect, useState } from 'react';
-import { api } from '../../../services/leagues.service';
-import { Preloader } from '../../../components/simple/preloader';
-import { TeamCard } from '../../../components/simple/team-card';
-import { useParams, useHistory } from 'react-router-dom';
-import { Links } from '../../../links';
+import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { teamsService } from '@services/teams.service';
+import { Preloader } from '@components/simple/preloader';
+import { TeamCard } from '@components/simple/team-card';
+import { NumberOfCards } from '@components/simple/cards-number';
+import { NoData } from '@components/ui/exeptions/no-data';
+import { SelectYear } from '@components/simple/selects/selects-year';
+import { TeamsSearch } from './teams-seacth';
 
 export const TeamsList = () => {
-  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [competition, setCompetitions] = useState({});
   const [teams, setTeams] = useState([]);
   const [unfilteredTeams, setUnfilteredTeams] = useState([]);
-  const [season, setSeason] = useState([]);
-  const history = useHistory();
   const { id } = useParams();
 
-  const startYear = 2000;
-  const yearNow = new Date().getFullYear();
-  const yearsDif = yearNow - startYear;
-  const yearsArr = Array.from({ length: yearsDif + 1 }, (v, k) => k);
-  let timerId;
-
   useEffect(() => {
-      teamsReducer.getTeams();
-    }, [history.location],
-  );
-
-  const teamsReducer = {
-    getTeams() {
-      api.getTeams(id).then(
+      teamsService.getTeams(id).then(
         (response) => {
-          if (response.error) {
-            setError(response.error);
-            setIsLoaded(true);
-            return;
-          }
           setTeams(response.teams);
           setUnfilteredTeams(response.teams);
-          setCompetitions(response.competition);
-          setSeason(response.season);
           setIsLoaded(true);
         },
       );
-    },
-  };
+    }, [id],
+  );
 
-  const lbFilter = (value) => {
-    clearTimeout(timerId);
-    timerId = setTimeout(() => {
-        let filteredTeams = unfilteredTeams.filter(team => {
-          return team.name.toLowerCase().includes(value.toLowerCase());
-        });
-        if (!filteredTeams.length) {
-          filteredTeams = unfilteredTeams.filter(team => {
-            return team.venue?.toLowerCase().includes(value.toLowerCase());
-          });
-        }
-        setTeams(filteredTeams);
-      }, 1000,
-    );
-  };
-
-  const constructYear = (option) => {
-    return 2000 + option;
-  };
+  const memorizedTeams = useMemo(() => teams.map(team => <TeamCard {...team} />), [teams]);
 
   return (
-    <Preloader isLoaded={isLoaded} error={error}>
+    <Preloader isLoaded={isLoaded}>
       <div className='container'>
         <h1>Teams</h1>
-        <input type='text'
-               placeholder='Search'
-               className='search-input'
-               onChange={(event) => lbFilter(event.target.value)}
-        />
-        <select
-          className='select-year'
-          onChange={(e) => history.push(Links.teamsList(e.target.value))}
-          defaultValue={id}
-        >
-          {
-            yearsArr.map(year => <option key={year} value={constructYear(year)}>{constructYear(year)}</option>)
-          }
-        </select>
+        <TeamsSearch unfiltered={unfilteredTeams} set={setTeams} />
+        <SelectYear {...id} />
         <div className='cards-wrapper'>
-          {teams.map(team =>
-            <TeamCard {...team} />,
-          )
-          }</div>
+          {teams
+            ? memorizedTeams
+            : <NoData />}
+        </div>
         <div>
-          <span className='number-of-objects'><span>Teams in the league:</span>{teams.length}</span>
+          <NumberOfCards length={teams.length} name='Teams in the league' />
         </div>
       </div>
     </Preloader>

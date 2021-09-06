@@ -1,17 +1,21 @@
+@import 'colors';
 .cards-wrapper, .card {
   display: flex;
   flex-wrap: wrap;
   margin: 10px;
-  color: white;
+  color: $white;
   justify-content: center;
 }
 
 .card {
   width: 350px;
   height: 100px;
-  background-color: #222226;
+  background-color: $black;
   border-radius: 5px;
   flex-direction: column;
+  @media(max-width: 480px) {
+    width: 200px;
+  }
 }
 
 .card img {
@@ -20,13 +24,8 @@
   margin-left: 20px;
   border-radius: 10%;
 }
-//изменить на более понятное
-.number-of-objects {
-  font-size: 24px;
-  text-align: center;
-  color: grey;
 
   span {
     margin-right: 5px;
   }
-}
+

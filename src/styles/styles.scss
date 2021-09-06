@@ -6,21 +6,35 @@
 @import 'link';
 @import 'button';
 @import 'calendar';
+@import 'errors';
 
-//добавить вариации контейнера l, x, xxl,
-.container {
+%container {
   margin: 0 auto;
   overflow: hidden;
   box-sizing: border-box;
-  max-width: 1550px;
+  max-width: 1600px;
   text-align: center;
   font-size: 15px;
+  padding: 0 10px;
+
+  @media(max-width: 1366px) {
+    font-size: 14px;
+  }
+  @media(max-width: 720px) {
+    font-size: 13px;
+  }
+  @media(max-width: 480px) {
+    font-size: 12px;
+  }
+}
+
+.container {
+  @extend %container;
 }
 
 .s-container {
-  margin: 0 auto;
-  overflow: hidden;
-  box-sizing: border-box;
-  max-width: 1400px;
-  font-size: 15px;
+  @extend %container;
+
+  text-align: left;
+  max-width: 1500px;
 }

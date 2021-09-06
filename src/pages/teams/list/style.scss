@@ -1,14 +1,13 @@
-.lastUpdated {
-  font-size: 13px;
-  color: #444446;
-}
-
 .select-year {
   background: transparent;
-  width: 150px;
+  width: 10%;
   padding: 10px;
   font-size: 15px;
   border: 1px solid #ccc;
   height: 40px;
   color: white;
+  @media(max-width: 720px) {
+  width: 80px;
+    margin-top: 10px;
+  }
 }

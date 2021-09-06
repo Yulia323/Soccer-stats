@@ -1,17 +1,17 @@
 import './style.scss';
-import Logo from '../../../assets/icons/logo.png';
 import { Link } from 'react-router-dom';
-import { Links, LinksNames } from '../../../links';
-import { teamsStartYear } from '../../../app-constants';
+import { Links, LinksNames } from '@paths/links';
+import { teamsStartId } from '../../../app-constants';
+import Logo from '@assets/icons/logo.png';
 
-export const Header = () => {
-  return (
-    <header className='header'>
-      <div className='container'>
-        <img src={Logo} alt='' />
-        <Link class='btn-link' to={Links.leaguesList}>{LinksNames.leaguesList}</Link>
-        <Link class='btn-link' to={Links.teamsList(teamsStartYear)}>{LinksNames.teamsList}</Link>
-      </div>
-    </header>
-  );
-};
+export const Header = () => (
+  <header className='header'>
+    <div className='container'>
+      <Link to={Links.leaguesList}>
+        <img className='logo' src={Logo} alt='' />
+      </Link>
+      <Link className='link-btn' to={Links.leaguesList}>{LinksNames.leaguesList}</Link>
+      <Link className='link-btn' to={Links.teamsList(teamsStartId)}>{LinksNames.teamsList}</Link>
+    </div>
+  </header>
+);

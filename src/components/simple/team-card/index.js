@@ -1,5 +1,5 @@
-import { Links } from '../../../links';
 import { NavLink } from 'react-router-dom';
+import { Links } from '@paths/links';
 import { EmblemIcon } from '../icons/emblem-icon';
 
 export const TeamCard = (team) => (

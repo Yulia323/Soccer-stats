@@ -2,7 +2,6 @@ strong {
   margin-right: 10px;
 }
 
-//не ртносится к таблицам
 .table-container {
   text-align: left !important;
   line-height: 20px;
@@ -19,11 +18,17 @@ strong {
   img {
     width: 45px;
     padding: 0 10px;
+    @media(max-width: 720px) {
+      display: none;
+    }
   }
+
   p {
-  display: flex;
-  align-items: center;
-}
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    flex-wrap: wrap;
+  }
 
 }
 
@@ -38,9 +43,6 @@ strong {
   display: flex;
 }
 
-// разобраться со странным стилем, изменить
-
-//Изменить на table-tabs
 .table-tabs {
   text-align: left;
   font-size: 18px;

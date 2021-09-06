@@ -6,4 +6,12 @@
 
 .icon {
   width: 250px;
+  margin-right: 30px;
+  @media(max-width: 720px) {
+    width: 180px;
+  }
+  @media(max-width: 480px) {
+    display: none;
+  }
 }
+

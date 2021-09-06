@@ -1,26 +1,22 @@
-import { api } from '../../../services/leagues.service';
 import { useEffect, useState } from 'react';
-import { LeagueCard } from '../../../components/simple/league-card';
-import { Preloader } from '../../../components/simple/preloader';
+import { leaguesService } from '@services/leagues.service';
+import { LeagueCard } from '@components/simple/league-card';
+import { Preloader } from '@components/simple/preloader';
+import { CompetitionsSearch } from './competitions-seacth';
+import { NumberOfCards } from '@components/simple/cards-number';
+import { BtnPager } from '@components/simple/buttons/btn-pager';
 
 export const CompetitionsList = (props) => {
-  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [competitions, setCompetitions] = useState([]);
   const [displayedCompetitions, setDisplayedCompetitions] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [lastPage, setLastPage] = useState(false);
   const competitionsOnOnePage = 20;
-  let timerId;
 
   useEffect(() => {
-      api.getLeagues().then(
+      leaguesService.getLeagues().then(
         (response) => {
-          if (response.message) {
-            setError(response);
-            setIsLoaded(true);
-            return;
-          }
           setCompetitions(response.competitions);
           setCurrentPage(1);
           setLastPage(false);
@@ -46,39 +42,22 @@ export const CompetitionsList = (props) => {
     setDisplayedCompetitions(slicedCompetitions);
   };
 
-  const lbFilter = (value) => {
-    clearTimeout(timerId);
-    timerId = setTimeout(() => {
-        let filteredCompetitions = competitions.filter(competition => {
-          return competition.area.name.toLowerCase().includes(value.toLowerCase());
-        });
-        if (!filteredCompetitions.length) {
-          filteredCompetitions = competitions.filter(competition => {
-            return competition.name?.toLowerCase().includes(value.toLowerCase());
-          });
-        }
-        setDisplayedCompetitions(filteredCompetitions);
-      }, 1000,
-    );
-  };
-
   return (
-    <Preloader isLoaded={isLoaded} error={error}>
+    <Preloader isLoaded={isLoaded} >
       <div className='container'>
         <h1>Competitions</h1>
-        <input type='text'
-               placeholder='Search'
-               className='search-input search-input-competitions'
-               onChange={(event) => lbFilter(event.target.value)}
-        />
+        <CompetitionsSearch competitions={competitions} set={setDisplayedCompetitions} />
         <div className='cards-wrapper'>
           {displayedCompetitions.map(competition =>
-            <LeagueCard {...competition} />,
+            <LeagueCard {...competition} key={competition.id}/>,
           )}
         </div>
-        {!lastPage &&
-          <button className='btn-add-more' onClick={() => setCurrentPage(currentPage + 1)}>Show more</button>}
-        <p className='number-of-objects'><span>Total leagues:</span>{competitions.length}</p>
+        <BtnPager length={displayedCompetitions.length}
+                  lastPage={lastPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+        />
+        <NumberOfCards length={competitions.length} name='Total leagues' />
       </div>
     </Preloader>
   );

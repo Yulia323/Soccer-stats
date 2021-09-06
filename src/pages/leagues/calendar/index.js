@@ -1,16 +1,15 @@
-import { api } from '../../../services/leagues.service';
-import { Links } from '../../../links';
-import arrow from '../../../assets/icons/arrow.png';
-import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Preloader } from '../../../components/simple/preloader';
-import { Routes } from '../../../routes';
-import { SeasonsTable } from '../../../components/simple/tables/seasons-table';
-import { LeagueMatchesTable } from '../../../components/simple/tables/league-match-table';
-import { EmblemIcon } from '../../../components/simple/icons/emblem-icon';
+import { Link, NavLink, Route, useParams } from 'react-router-dom';
+import { Links } from '@paths/links';
+import { Routes } from '@paths/routes';
+import { leaguesService } from '@services/leagues.service';
+import { Preloader } from '@components/simple/preloader';
+import { SeasonsTable } from '@components/simple/tables/seasons-table';
+import { LeagueMatchesTable } from '@components/simple/tables/league-matches-table';
+import { EmblemIcon } from '@components/simple/icons/emblem-icon';
+import arrow from '@assets/icons/arrow.png';
 
 export const CompetitionsCalendar = () => {
-  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [matches, setMatches] = useState([]);
   const [seasons, setSeasons] = useState([]);
@@ -18,12 +17,12 @@ export const CompetitionsCalendar = () => {
   const { id } = useParams();
 
   useEffect(() => {
-      api.getLeagueMatches(id).then(
+      leaguesService.getLeagueMatches(id).then(
         (response) => {
           setMatches(response.matches);
         },
       );
-      api.getLeagueCalendar(id).then(
+      leaguesService.getLeagueCalendar(id).then(
         (response) => {
           setSeasons(response.seasons);
           setCompetition(response);
@@ -34,9 +33,11 @@ export const CompetitionsCalendar = () => {
   );
 
   return (
-    <Preloader isLoaded={isLoaded} error={error}>
+    <Preloader isLoaded={isLoaded}>
       <div className='container'>
+        {/*вынести в отдельный компонент*/}
         <div className='btn-back'>
+          {/*отдельный компонент*/}
           <Link to={Links.leaguesList}>
             <img className='arrow' src={arrow} alt='' />
           </Link>
