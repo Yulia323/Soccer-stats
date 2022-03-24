@@ -26,7 +26,7 @@ export const TeamsList = () => {
     }, [id],
   );
 
-  const memorizedTeams = useMemo(() => teams.map(team => <TeamCard {...team} />), [teams]);
+  const memorizedTeams = useMemo(() => teams.map(team => <TeamCard key={team.id} {...team} />), [teams]);
 
   return (
     <Preloader isLoaded={isLoaded}>

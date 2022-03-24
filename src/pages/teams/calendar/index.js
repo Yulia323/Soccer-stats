@@ -1,6 +1,6 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Route, useParams } from 'react-router-dom';
+import { Link, NavLink, Route, Switch, useParams } from 'react-router-dom';
 import { Routes } from '@paths/routes';
 import { Links } from '@paths/links';
 import { teamsService } from '@services/teams.service';
@@ -69,14 +69,14 @@ export const TeamsCalendar = () => {
             PLAYERS {team.squad?.length}
           </NavLink>
         </div>
-        <switch>
+        <Switch>
           <Route path={Routes.teamMatches}>
             <TeamMatchesTable matches={matches} />
           </Route>
           <Route path={Routes.teamPlayers}>
             <PlayersTable players={team.squad} />
           </Route>
-        </switch>
+        </Switch>
       </div>
     </Preloader>);
 };

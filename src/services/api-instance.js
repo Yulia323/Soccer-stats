@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-  withCredentials: true,
   baseURL: 'https://api.football-data.org/v2/',
   headers: {
+    'Content-Type': 'text/plain',
     'X-Auth-Token': process.env.REACT_APP_API_KEY,
   },
 });

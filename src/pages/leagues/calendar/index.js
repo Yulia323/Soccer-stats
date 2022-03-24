@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Route, useParams } from 'react-router-dom';
+import { Link, NavLink, Route, Switch, useParams } from 'react-router-dom';
 import { Links } from '@paths/links';
 import { Routes } from '@paths/routes';
 import { leaguesService } from '@services/leagues.service';
@@ -66,10 +66,10 @@ export const CompetitionsCalendar = () => {
             SEASONS {seasons.length}
           </NavLink>
         </div>
-        <switch>
+        <Switch>
           <Route path={Routes.leagueMatches} render={() => <LeagueMatchesTable matches={matches} />} />
           <Route path={Routes.leaguesSeasons} render={() => <SeasonsTable seasons={seasons} />} />
-        </switch>
+        </Switch>
       </div>
     </Preloader>);
 };
